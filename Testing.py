@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
 
 # Author : Federico Garzarelli
-# Date : 06/01/2020
-# Description : web crawler for www.astalegale.net
+# Date : 16/05/2017
+# Description : web crawler for www.astegiudiziarie.it
 #
 # Requirements:
 # - selenium (run "pip install selenium" from cmd)
-# - Mozilla
-# - geckodriver.exe, to be placed in PATH (e.g. C:\Users\feder\Anaconda3)
+# - Google Chrome
+# - chromedriver.exe, to be placed in PATH (e.g. C:\Users\feder\Anaconda3)
 #
 # To Launch:
 # - start python from cmd
-# - launch in python, execfile("astalegale.py")
+# - change search parameters in this script as required
+# - launch in python, execfile("astegiudiziarie.py")
 # - when opening the output text file in Excel, select the encoding utf-8 and change the regional settings to Italian
 
 
 # global vars
+#                   Type, Price Min, Price Max, Province, Town
+search_params = ["Appartamento", 100000, 120000, "Roma", "Roma"]
 links = []
 
 # Libraries
@@ -24,12 +27,17 @@ import codecs
 
 sys.stdout = codecs.getwriter("iso-8859-1")(sys.stdout, 'xmlcharrefreplace')
 import urllib3
+import urllib
 
 urllib3.disable_warnings()
 from bs4 import BeautifulSoup
+import string
+import random
+import numpy as np
 import pandas as pd
+import time
+import os
 import re
-
 # For selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -38,11 +46,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
+from selenium.common.exceptions import NoSuchElementException
 from time import sleep
-from datetime import date
 
-URL = "https://www.astalegale.net/"
+
+# debugger
+# import pdb
+# from pdb import set_trace as bp
 
 # Initialise the Firefox driver
 def init_driver():
@@ -50,20 +60,38 @@ def init_driver():
     driver.wait = WebDriverWait(driver, 5)
     return driver
 
-def safe_click(byWhat, buttonLabel):
-    driver.wait = WebDriverWait(driver, 5)
-    button = driver.wait.until(EC.element_to_be_clickable((byWhat, buttonLabel)))
-    button.click()
 
 # Launch the search given the parameters specified in search_params
-def lookup(driver):
-    driver.get(URL)
+def lookup(driver, search_params):
+    driver.get("https://www.astalegale.net/")
     try:
-        safe_click(By.ID, "cc-goto-advanced-search")
-        WebDriverWait(driver, 60).until(EC.url_changes(URL))
+        boxType = Select(driver.wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "#ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_drpdTipologie"))))
+        boxPriceFrom = driver.wait.until(EC.presence_of_element_located(
+            (By.XPATH,
+             """//*[@id="ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_txtFasciaPrezzoDa"]""")))
+        boxPriceTo = driver.wait.until(EC.presence_of_element_located(
+            (By.XPATH,
+             """//*[@id="ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_txtFasciaPrezzoA"]""")))
+        boxProvince = Select(driver.wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, "#ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_drpdProvincie"))))
+        boxTown = driver.wait.until(EC.presence_of_element_located(
+            (By.XPATH,
+             """//*[@id="ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_txtComuneImmobile"]""")))
+
+        button = driver.wait.until(EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, "#ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_btnCerca")))
+
+        boxType.select_by_visible_text(search_params[0])
+        boxPriceFrom.send_keys(search_params[1])
+        boxPriceTo.send_keys(search_params[2])
+        boxProvince.select_by_visible_text(search_params[3])
+        boxTown.send_keys(search_params[4])
+
+        button.click()
+        sleep(10)
     except TimeoutException:
-        pass
-        # print("Box or Button not found.") # TODO: Fix error thrown by print
+        print("Box or Button not found.")
 
 
 # Loop through the results of the search query and save the corresponding links
@@ -71,17 +99,19 @@ def getlinks(driver):
     pages_remaining = True
     while pages_remaining:
         # DO YOUR THINGS WITHIN THE PAGE
-        for a in driver.find_elements_by_class_name('cc-item-grid'):
+        for a in driver.find_elements_by_class_name('app-detail-open cc-link we-guaglio we-dark'):
             links.append(a.find_element_by_css_selector('a').get_attribute('href'))
         # Checks if there are more pages with links
         try:
-            NextPagebutton = driver.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".app-btnNextPage")))
+            NextPagebutton = driver.wait.until(EC.element_to_be_clickable(
+                (By.CLASS_NAME, "app-btnNextPage cc-arrow cc-arrow-right")))
             driver.execute_script("arguments[0].scrollIntoView();", NextPagebutton)
             NextPagebutton.click()
             sleep(5)
         except TimeoutException:
-            #print("End of pages.")
+            print("End of pages.")
             pages_remaining = False
+
 
 # give webpage to BeautifulSoup for HTML parsing
 def givesoup(url):
@@ -93,8 +123,8 @@ def givesoup(url):
             soup = BeautifulSoup(page.data, "lxml", from_encoding='utf8')
             return soup
         except Exception:
-            #print('Internet connectivity Error Retrying in 5 seconds :');
-            #print(MaxRetry)
+            print('Internet connectivity Error Retrying in 5 seconds :');
+            print(MaxRetry)
             sleep(5)
             MaxRetry = MaxRetry - 1
 
@@ -139,7 +169,7 @@ def looplinks(driver):
         i = i + 1
         df = readhtml(link)
         data.append(df)
-        #print(str(i) + ': ' + link);
+        print(str(i) + ': ' + link);
     data = pd.concat(data, axis=0, ignore_index=True)
     return data
 
@@ -147,10 +177,10 @@ def looplinks(driver):
 # Main
 if __name__ == "__main__":
     driver = init_driver()
-    lookup(driver)
+    lookup(driver, search_params)
     getlinks(driver)
     data = looplinks(driver)
     driver.quit()
-    outfileName = "astalegale_" + date.today().strftime("%Y%m%d") + ".txt"
+    outfileName = "astegiudiziarie_" + search_params[4] + "_da" + str(search_params[1]) + "_a" + str(
+        search_params[2]) + ".txt"
     data.to_csv(outfileName, index=False, encoding='utf-8')
-
