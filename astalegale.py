@@ -42,6 +42,9 @@ from selenium.common.exceptions import TimeoutException
 from time import sleep
 from datetime import date
 
+from collections import Counter  # Counter counts the number of occurrences of each item
+
+
 URL = "https://www.astalegale.net/"
 
 # Initialise the Firefox driver
@@ -101,26 +104,52 @@ def givesoup(url):
 
 # HTML parsing with BeautifulSoup
 def readhtml(url):
+    titlearr = []
     headerarr = []
     dataarr = []
     soup = givesoup(url)  # Tutto ciò che è nella pagina ora è in soup.
-    for tag in soup.find_all("tr"):
-        for elem in tag.find_all("th"):
+
+    for tag in soup.find_all('div', class_='cc-section-info'):
+        thistitle = tag.find('h3', class_='cc-title')
+        thistitle = thistitle.getText()
+        thistitle = re.sub('\s+', ' ', thistitle).strip()  # substitute all tabs, newlines and other "whitespace-like" characters, eliminate trailing space
+        thistitle.encode(encoding='UTF-8', errors='strict')
+        titlearr.append(thistitle)
+        for elem in tag.find_all('span', class_='cc-field-title'):
             thisheader = elem.getText()
-            thisheader = re.sub('\s+', ' ',
-                                thisheader).strip()  # substitute all tabs, newlines and other "whitespace-like" characters, eliminate trailing space
+            thisheader = re.sub('\s+', ' ', thisheader).strip()  # substitute all tabs, newlines and other "whitespace-like" characters, eliminate trailing space
             thisheader.encode(encoding='UTF-8', errors='strict')
             headerarr.append(thisheader)
-
-            thisdata = elem.findNext('td').getText()
-            thisdata = re.sub('\s+', ' ', thisdata).strip()
-            thisdata.encode(encoding='UTF-8', errors='strict')
-            dataarr.append(thisdata)
+            
+            thisdata = elem.findNext('span', class_='cc-field-text')
+            if thisdata is not None:
+                thisdata = thisdata.getText()
+                thisdata = re.sub('\s+', ' ', thisdata).strip()
+                thisdata.encode(encoding='UTF-8', errors='strict')
+                dataarr.append(thisdata)
+            else:
+                dataarr.append("Empty")
+    
+    for tag in soup.find_all('div', class_='cc-info-row'):
+        for elem in tag.find_all('span', class_='cc-label'):
+            thisheader = elem.getText()
+            thisheader = re.sub('\s+', ' ', thisheader).strip()  # substitute all tabs, newlines and other "whitespace-like" characters, eliminate trailing space
+            thisheader.encode(encoding='UTF-8', errors='strict')
+            headerarr.append(thisheader)
+            
+            thisdata = elem.findNext('span', class_='cc-text')
+            if thisdata is not None:
+                thisdata = thisdata.getText()
+                thisdata = re.sub('\s+', ' ', thisdata).strip()
+                thisdata.encode(encoding='UTF-8', errors='strict')
+                dataarr.append(thisdata)
+            else:
+                dataarr.append("Empty")
     # add the url to the dataframe
     headerarr.append('url')
     dataarr.append(url)
+            
     # rename column headers which are equal
-    from collections import Counter  # Counter counts the number of occurrences of each item
     counts = Counter(headerarr)
     for s, num in counts.items():
         if num > 1:  # ignore strings that only appear once
