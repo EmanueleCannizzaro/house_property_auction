@@ -12,7 +12,6 @@
 # To Launch:
 # - start python from cmd
 # - change search parameters in this script as required
-# - launch in python, execfile("astegiudiziarie.py")
 # - when opening the output text file in Excel, select the encoding utf-8 and change the regional settings to Italian
 
 

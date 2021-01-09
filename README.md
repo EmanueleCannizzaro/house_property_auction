@@ -1,5 +1,5 @@
 # AuctionsWebCrawler
-Web Crawlers for auctions
+Web Crawlers for real estate auctions and data analysis.  
 
 # Install Requirements
 
@@ -8,6 +8,10 @@ A requirements file has been added to be able to install the required libraries.
 ```bash
 pip install -r requirements
 ```
+
+**Other requirements**
+- Mozilla
+- geckodriver.exe, to be placed in PATH (e.g. C:\Users\feder\Anaconda3)
 
 # Data sources 
 | Website                                           | Comments                   |
