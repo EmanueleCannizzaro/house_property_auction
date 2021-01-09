@@ -2,9 +2,6 @@
 import sys
 import codecs
 
-#sys.stdout = codecs.getwriter("iso-8859-1")(sys.stdout, 'xmlcharrefreplace')
-sys.stdout.reconfigure(encoding='iso-8859-1')
-
 import urllib3
 
 urllib3.disable_warnings()
@@ -25,19 +22,17 @@ from time import sleep
 from datetime import date
 
 from collections import Counter  # Counter counts the number of occurrences of each item
+#sys.stdout = codecs.getwriter("iso-8859-1")(sys.stdout, 'xmlcharrefreplace')
+sys.stdout.reconfigure(encoding='iso-8859-1')
 
 
-# Create a webcrawler parent class.
+#
+# Parent class: WebCrawler
+#
 class WebCrawler():
-    # parameters which are configurable for the strategy
-    params = (
-        ('printlog', True),
-        ('URL', ''),
-        ('filters', ),
-    )
 
-    def __init__(self):
-        self.url = self.params.URL
+    def __init__(self, *args, **kwargs):
+        self.__dict__.update(kwargs)
         self.driver = webdriver.Firefox()
         self.driver.wait = WebDriverWait(self.driver, 5)
         self.links = []
@@ -50,7 +45,7 @@ class WebCrawler():
 
     def log(self, txt, dt=None):
         ''' Logging function for this strategy txt is the statement and dt can be used to specify a specific datetime'''
-        if self.params.printlog:
+        if self.printlog:
             print('%s, %s' % (dt.isoformat(), txt))
 
     # give webpage to BeautifulSoup for HTML parsing
@@ -91,6 +86,7 @@ class WebCrawler():
         self.data = self.looplinks()
         self.driver.quit()
         return self.data
+
 #
 # Child class: astalegale
 #
@@ -98,10 +94,10 @@ class astalegale(WebCrawler):
 
     # Launch the search given the parameters specified in search_params
     def lookup(self):
-        self.driver.get(self.params.URL)
+        self.driver.get(self.url)
         try:
             self.safe_click(By.ID, "cc-goto-advanced-search")
-            WebDriverWait(self.driver, 60).until(EC.url_changes(self.params.URL))
+            WebDriverWait(self.driver, 60).until(EC.url_changes(self.url))
         except TimeoutException:
             pass
             # print("Box or Button not found.") # TODO: Fix error thrown by print
@@ -183,7 +179,6 @@ class astalegale(WebCrawler):
         df = pd.DataFrame(data=[dataarr], columns=headerarr)
         return df
 
-
 #
 # Child class: astegiudiziarie
 #
@@ -192,7 +187,7 @@ class astegiudiziarie(WebCrawler):
     # Launch the search given the parameters specified in search_params
     def lookup(self):
 
-        self.driver.get(self.params.url)
+        self.driver.get(self.url)
         try:
             boxType = Select(self.driver.wait.until(EC.presence_of_element_located(
                 (By.CSS_SELECTOR, "#ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_drpdTipologie"))))
@@ -211,11 +206,11 @@ class astegiudiziarie(WebCrawler):
             button = self.driver.wait.until(EC.element_to_be_clickable(
                 (By.CSS_SELECTOR, "#ctl00_ContentPlaceHolder1_Mascherericerche1_ImmobiliareGenerale1_btnCerca")))
 
-            boxType.select_by_visible_text(self.params.filters[0])
-            boxPriceFrom.send_keys(self.params.filters[1])
-            boxPriceTo.send_keys(self.params.filters[2])
-            boxProvince.select_by_visible_text(self.params.filters[3])
-            boxTown.send_keys(self.params.filters[4])
+            boxType.select_by_visible_text(self.filters[0])
+            boxPriceFrom.send_keys(self.filters[1])
+            boxPriceTo.send_keys(self.filters[2])
+            boxProvince.select_by_visible_text(self.filters[3])
+            boxTown.send_keys(self.filters[4])
 
             button.click()
             sleep(10)
@@ -270,7 +265,6 @@ class astegiudiziarie(WebCrawler):
         headerarr = [re.sub(r'\b 1\b', '', w) for w in headerarr]  # eliminate suffix 1
         df = pd.DataFrame(data=[dataarr], columns=headerarr)
         return df
-
 
 #
 # Child class: REdiscount

@@ -1,3 +1,6 @@
+backtrader
+utils
+metabase
 selenium
 scipy
 pandas==0.24.2
