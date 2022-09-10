@@ -172,9 +172,7 @@ def looplinks(driver):
     data = pd.concat(data, axis=0, ignore_index=True)
     return data
 
-
-# Main
-if __name__ == "__main__":
+def main():    
     driver = init_driver()
     lookup(driver, search_params)
     getlinks(driver)
@@ -183,3 +181,9 @@ if __name__ == "__main__":
     outfileName = "astegiudiziarie_" + search_params[4] + "_da" + str(search_params[1]) + "_a" + str(
         search_params[2]) + ".txt"
     data.to_csv(outfileName, index=False, encoding='utf-8')
+
+
+# Main
+if __name__ == "__main__":
+    main()
+    

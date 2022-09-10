@@ -1,8 +1,7 @@
-import datetime
 import argparse
+import datetime
 from WebCrawlerClass import *
-from GLOBAL_VARS import *
-from auctions import auctions
+from auctions import Auction
 
 
 def parse_args():
@@ -17,26 +16,26 @@ if __name__ == "__main__":
     args = parse_args()
 
     data = []
-    auctions = auctions()
+    auction = Auction()
 
     # Add the webcrawlers specified by the user into the auctions class
     if args.website is None:
-        websites_list = list(auctionUrls_dict.keys())
+        websites = list(auction.URLS.keys())
     else:
-        websites_list = args.website.split(',')
+        websites = args.website.split(',')
 
-    for website in websites_list:
-        auctions.addwebcrawler(eval(website), url=auctionUrls_dict[website], printlog=True)
+    for website in websites:
+        auction.add_webcrawler(eval(website), url=auction.URLS[website], printlog=True)
 
     # run the scrape
-    auctions.scrape()
+    auction.scrape()
 
     outfileName = "scrapeddata_" + date.today().strftime("%Y%m%d") + ".csv"
-    auctions.scrapeddata.to_csv(outfileName, index=False, encoding='utf-8')
+    auction.scrapeddata.to_csv(outfileName, index=False, encoding='utf-8')
 
     # clean the data
-    #auctions.cleandata()
+    #auction.clean_data()
 
     # analyze the data
-    #auctions.analyze()
+    #auction.analyze()
 

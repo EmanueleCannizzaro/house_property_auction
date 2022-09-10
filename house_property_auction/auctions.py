@@ -1,15 +1,20 @@
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 import itertools
 
-class auctions():
-
+class Auction():    
+    # available websites
+    URLS = {
+        'astegiudiziarie': 'https://www.astegiudiziarie.it',
+        'astalegale': 'https://www.astalegale.net/',
+        'REdiscount': 'https://www.realestatediscount.com/',
+        'asteRE': 'https://www.asterealestate.it/index_A.jsp',
+        'giustizia': 'https://pvp.giustizia.it/pvp/it/homepage.page'
+    }
+    
     def __init__(self):
-        self.webcrawlers = list()
-        self.scrapeddata = list()
+        self.webcrawlers = []
+        self.scrapeddata = []
 
-    def addwebcrawler(self, webcrawler, *args, **kwargs):
+    def add_webcrawler(self, webcrawler, *args, **kwargs):
         '''
         Adds a ``webcrawler`` class to the mix for a single pass run.
         Instantiation will happen during ``run`` time.
@@ -34,4 +39,3 @@ class auctions():
 
     def analyze(self):
         return
-

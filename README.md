@@ -41,4 +41,8 @@ pip install -r requirements
 
 
 
+https://www.google.com/search?q=crescita+demografica+comuni+italia&oq=crescita+demografica+comuni+italia&aqs=chrome..69i57j33i10i160l2j33i22i29i30l6j33i15i22i29i30.10762j0j7&sourceid=chrome&ie=UTF-8
+1. https://ugeo.urbistat.com/AdminStat/it/it/classifiche/dati-sintesi/province/italia/380/1
+1. https://it.wikipedia.org/wiki/Demografia_d%27Italia
+1. https://demo.istat.it/popres/download.php?anno=2022&lingua=ita
 
