@@ -127,3 +127,28 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+__pycache__
+__pycache__/*
+*/__pycache__/*
+.ipynb_checkpoints/*
+*/.ipynb_checkpoints/*
+.vscode
+
+/.vscode
+/Properties.csv
+/venv
+/db_passwords.py
+
+.idea
+results.json
+results.html
+celerybeat-schedule.db
+house_hunter.zip
+venv
+
+# celery beat schedule file
+pip-wheel-metadata/
+
+

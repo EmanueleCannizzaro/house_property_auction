@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from time import sleep, time
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 #from webdriver_manager.firefox import FirefoxDriverManager
 
 
@@ -28,11 +28,11 @@ def test_astegiudiziarie():
     #options.add_argument('profile-directory=Selenium')
     #options.add_argument('profile-directory=Person 1')
     #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    if 0 == 1:
+    if 1 == 1:
         options = webdriver.chrome.options.Options()
-        options.add_argument("user-data-dir=/home/emanuele/.config/google-chrome")
-        options.add_argument('profile-directory=Default')
-        DRIVER_PATH = '/data/git/chromedriver'
+        #options.add_argument("user-data-dir=/home/emanuele/.config/google-chrome")
+        #options.add_argument('profile-directory=Default')
+        DRIVER_PATH = '/home/emanuele/bin/chromedriver'
         driver = webdriver.Chrome(service=webdriver.chrome.service.Service(DRIVER_PATH), options=options)
     else:
         options = webdriver.firefox.options.Options()
@@ -40,7 +40,7 @@ def test_astegiudiziarie():
         #options.add_argument("--allow-running-insecure-content")
         #options.add_argument("user-data-dir=/home/emanuele/.mozilla/firefox/bxnbv04s.default")
         #options.add_argument('profile-directory=default')
-        DRIVER_PATH = '/data/git/geckodriver'
+        DRIVER_PATH = '/home/emanuele/bin/geckodriver'
         driver = webdriver.Firefox(service=webdriver.firefox.service.Service(DRIVER_PATH), options=options)
     driver.maximize_window()
     driver.get(URL)

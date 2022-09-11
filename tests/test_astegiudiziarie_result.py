@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
 
 
-def get_table(round, url=url):
+def get_table(round, url):
     round_url = f'{url}/{round}'
     page = requests.get(round_url)
     soup = BeautifulSoup(page.text, 'html.parser')
