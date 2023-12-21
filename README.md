@@ -103,18 +103,68 @@ A requirements file has been added to be able to install the required libraries.
 pip install -r requirements
 ```
 
+Search on GitHub for https://github.com/Real-Estate-Scrapy?language=python:
+
+1. Atico       https://github.com/Real-Estate-Scrapy/atico.git
+1. Dedomeno    https://github.com/ginopalazzo/dedomeno.git
+1. Fotocasa    https://github.com/Real-Estate-Scrapy/fotocasa.git
+1. Habitaclia  https://github.com/Real-Estate-Scrapy/habitaclia.git
+1. Housell     https://github.com/Real-Estate-Scrapy/housell.git
+1. Housfly     https://github.com/Real-Estate-Scrapy/housfy.git
+1. Kasaz       https://github.com/Real-Estate-Scrapy/kasaz.git
+1. Pisocasas   https://github.com/Real-Estate-Scrapy/pisocasas.git
+1. Pisos       https://github.com/Real-Estate-Scrapy/pisos.git
+1. scraping-real-estate-websites https://github.com/dmpe/scraping-real-estate-websites.git
+1. Tucasa      https://github.com/Real-Estate-Scrapy/tucasa.com.git
+
+It should also include
+1. real-estate-scrapers https://github.com/tuw-eeg/real-estate-scrapers.git.
+
+It takes advantage of Scrapy to scrape data from the web, in combination with web-poet and scrapy-poet to decouple the scraping logic (the HTML structure of different real estate websites) abd the spider logic (the logic to collect the data).
+
+
 **Other requirements**
 - Mozilla
 - geckodriver.exe, to be placed in PATH (e.g. C:\Users\feder\Anaconda3)
 
 # Data sources 
-| Website                                           | Comments                   |
-|---------------------------------------------------|----------------------------|
-| https://www.astegiudiziarie.it                    |   |
-| https://www.astalegale.net/                       |   |
-| https://www.realestatediscount.com/               |   |
-| https://www.asterealestate.it/index_A.jsp         |   |
-| https://pvp.giustizia.it/pvp/it/homepage.page     |   |
+| Website                                                | Comments                                                                      | Search URL                                                                                                                                                                                             |
+|--------------------------------------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| https://annunci.repubblica.it/italia/immobiliare/      | ![No](docs/images/x.svg "No")                                                 | https://annunci.repubblica.it/italia/immobiliare/                                                                                                                                                      |
+| https://aste.immobiliare.it/                           | ![No](docs/images/x.svg "No")                                                 | https://aste.immobiliare.it/ricerca-generale/provincia-PA/categoria-1?pag=2                                                                                                                            |
+| https://aste.iqera.it/index_A.jsp                      | ![No](docs/images/x.svg "No")                                                 | https://aste.iqera.it/public/estate/ricerca_A.jsp?aType=search.are&txtRicercaRegione_COMBO=SIC&txtRicercaProvincia_COMBO=PA&txtRicercaComuni_COMBO=&txtImmTipo_COMBO=RESIDENZIALE&txtImmSupDa=&fs=true |
+| https://blinksre.prelios.com/                          | ![Next](docs/images/download.svg "Next")                                      |                                                                                                                                                                                                        |
+| https://immobiliare.guber.it/Home                      | ![Next](docs/images/download.svg "Next")                                      |                                                                                                                                                                                                        |
+| https://pvp.giustizia.it/pvp/it/homepage.page          | ![Yes](https://www.shareicon.net/download/2016/08/20/817720_check.svg "Done") |                                                                                                                                                                                                        |
+| https://resales.intrum.it/                             | ![Next](docs/images/download.svg "Next")                                      |                                                                                                                                                                                                        |
+| https://venditepubblichenotarili.notariato.it          | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.astainsieme.it                             | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.astalegale.net/                            | ![Next](docs/images/download.svg "Next")                                      | No                                                                                                                                                                                                     |
+| https://www.astagiudiziaria.com/                       | ![Next](docs/images/download.svg "Next")                                      | No                                                                                                                                                                                                     |
+| https://www.asteavvisi.it/                             | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.astegiudiziarie.it                         | ![Next](docs/images/download.svg "Next")                                      | No                                                                                                                                                                                                     |
+| https://www.asteimmobili.it/                           | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.asteravenna.eu/                            | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.astetelematiche.it/                        | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.avvisinotarili.notariato.it/               | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.canaleaste.it/                             | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.casa.it/                                   | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.entietribunali.it                          | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.fallcoaste.it                              | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.idealista.it/                              | ![Next](docs/images/download.svg "Next")                                      |                                                                                                                                                                                                        |
+| https://www.immobiliallasta.it/                        | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.immobiliare.it/                            | ![Next](docs/images/download.svg "Next")                                      |                                                                                                                                                                                                        |
+| https://www.intribunale.net/                           | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| http://www.legalmente.net                              | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.portaleaste.com                            | ![No](docs/images/x.svg "No")                                                 | No                                                                                                                                                                                                     |
+| https://www.quimmo.it/                                 | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.rivistaastegiudiziarie.it/                 | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.spazioaste.it/Immobili/Search              | ![No](docs/images/x.svg "No")                                                 | No                                                                                                                                                                                                     |
+| https://www.subito.it/annunci-italia/vendita/immobili/ | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.tribunale.laspezia.it/                     | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| https://www.tribunale.savona.giustizia.it/             | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| http://www.trovoaste.it/                               | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
+| http://www.trovocasa.corriere.it/                      | ![No](docs/images/x.svg "No")                                                 |                                                                                                                                                                                                        |
 
 
 # Todo List & Progress monitoring
@@ -135,7 +185,7 @@ pip install -r requirements
 
 
 
-https://www.google.com/search?q=crescita+demografica+comuni+italia&oq=crescita+demografica+comuni+italia&aqs=chrome..69i57j33i10i160l2j33i22i29i30l6j33i15i22i29i30.10762j0j7&sourceid=chrome&ie=UTF-8
+1. https://www.google.com/search?q=crescita+demografica+comuni+italia&oq=crescita+demografica+comuni+italia&aqs=chrome..69i57j33i10i160l2j33i22i29i30l6j33i15i22i29i30.10762j0j7&sourceid=chrome&ie=UTF-8
 1. https://ugeo.urbistat.com/AdminStat/it/it/classifiche/dati-sintesi/province/italia/380/1
 1. https://it.wikipedia.org/wiki/Demografia_d%27Italia
 1. https://demo.istat.it/popres/download.php?anno=2022&lingua=ita

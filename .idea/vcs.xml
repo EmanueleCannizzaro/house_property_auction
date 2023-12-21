@@ -2,5 +2,19 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/Real-Estate-Webscraper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/Scrapy-Idealista" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/_real_estate_scraper/The-Python-Mega-Course-Build-10-Real-World-Applications-" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/crib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/crib-web-ui" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/funda-scraper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/house-price-regression-project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/immosheets" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/property-visualization" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/property_auction_scraper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/real-estate-scraper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/rightmove_scraper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/rightmove_scraper.BAK" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/_todo/_references/rightmove_webscraper.py" vcs="Git" />
   </component>
 </project>

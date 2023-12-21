@@ -1,213 +1,165 @@
-import re
-import smtplib
-import ssl
 
-from bs4 import BeautifulSoup
-import requests
-import peewee
+import logging
+from autologging import logged, TRACE, traced
 
+from property_scraper import DEFAULT_GEOCODE_ENGINE, DEFAULT_HTML_PARSER, RIGHTMOVE_URL_ROOTNAME
+from property_scraper.rightmove_page import RightmovePage
+from property_scraper.rightmove_property import RightmoveProperty
+from property_scraper.scraper import Scraper
 
+@logged(logging.getLogger("property_scraper"))
+class RightmoveScraper(Scraper):
+    
+    URL_ROOTNAME = RIGHTMOVE_URL_ROOTNAME
 
-class SearchScraper:
-    def __init__(
-            self,
-            page_param,
-            per_page,
-            get_item_link_list_func,
-            user_agent,
-            start_page=0
-    ):
-        self.page_param = page_param
-        self.per_page = per_page
-        self.get_item_link_list_func = get_item_link_list_func
-        self.user_agent = user_agent
-        self.start_page = start_page
+    KEYS = [
+        #'propertyType', 
+        #'protocol', 
+        'location', 
+        'country', 
+        'locationIdentifier', 
+        'searchType', 'insId', 'radius', 'minPrice', 'maxPrice', 'minBedrooms', 'maxBedrooms', 'maxDaysSinceAdded', 
+        'displayPropertyType', 
+        '_includeSSTC', 'sortByPriceDescending', 'primaryDisplayPropertyType', 'secondaryDisplayPropertyType', 'oldDisplayPropertyType', 
+        'oldPrimaryDisplayPropertyType', 'newHome', 'auction', 'index'
+    ]
+    
+    # There are 24 results per page.
+    NUMBER_OF_RESULTS_PER_PAGE = 24
+    # Rightmove will return a maximum of 42 results pages
+    MAXIMUM_NUMBER_OF_PAGES = 42
+    #PROTOCOLS = ["http", "https"]
+    PROPERTY_TYPES = ["property-to-rent", "property-for-sale", "new-homes-for-sale"]
 
-    def search(self, starting_endpoint, params={}, v=False):
-        page = int(self.start_page)
-        while True:
-            print("Processing page {}".format(page))
-            links = self.get_item_link_list_func(
-                self.get(starting_endpoint, page, params)
-            )
-            if not links:
-                print("Finished searching")
-                break
-            for link in links:
-                yield self.get(link)
-            page = page + self.per_page
+    NUMBER_OF_RESULTS = {
+        'tag' : 'span', 
+        'attribute': 'class',
+        'value': 'searchHeader-resultCount'
+    }
 
-    def get(self, endpoint, page=0, params={}):
-        headers = {
-            'User-Agent': self.user_agent
-        }
-        if page:
-            params[self.page_param] = page
+    REGIONS = {
+        'Bristol': '5E219'
+    }
+    
+    '''
 
-        while True:
-            try:
-                r = requests.get(endpoint, headers=headers, params=params)
-            except Exception as e:
-                print("Couldn't connect, retrying...")
-                continue
-            r.raise_for_status()
-            break
-        return r.text
+    yes_pls = [
+        'underfloor',
+        'stunning',
+        'wooden floor',
+        'balcony',
+        'terrace',
+        'loft'
+    ]
+    no_thx = [
+        'groundfloor'
+    ]
+    STOP_PHRASES = [
+        "views over the garden",
+        "views over the rear garden", "views over the front garden",
+        "views over rear garden", "views over front garden",
+        "views across the gardens", "views onto the garden",
+        "in need of updating", "in need of modernisation",
+        "views over rear aspect", "views over front aspect",
+        "views over the rear aspect", "views over the front aspect",
+        "views over side aspect", "views over the side aspect",
+        "1970s",  "bungalow", "bunaglow",
+        "views to the front garden", "views to the rear garden"
+    ]
+    # "semi detached", "semi-detached", "semidetached",
 
-class Rightmove:
-    def __init__(self, user_agent):
-        self.params = {
-            'searchType': 'RENT',
-            'locationIdentifier': 'OUTCODE^1666',
-            'insId': '1',
-            'radius': '0.0',
-            'minPrice': '2750',
-            'maxPrice': '3250',
-            'minBedrooms': '2',
-            'maxDaysSinceAdded': '7',
-            # 'includeSSTC': 'true',
-            # '_includeSSTC': 'on'
-
-
-        }
-        self.endpoint = "http://www.rightmove.co.uk/"
-        self.endpoint_rent_search = "property-to-rent/find.html"
-
-        self.scraper = SearchScraper(
-            page_param="index",
-            per_page=10,
-            get_item_link_list_func=lambda html: set([
-                self.endpoint + x['href'] for x in
-                BeautifulSoup(html, "html.parser").find_all(
-                    "a",
-                    attrs={'class': 'propertyCard-link'}
-                ) if x['href']
-            ]),
-            user_agent=user_agent
-        )
-
-    def rental_search(self, params={}):
-        merged_params = self.params.copy()
-        merged_params.update(params)
-        for rental_property_html in self.scraper.search(
-                self.endpoint + self.endpoint_rent_search,
-                merged_params,
-                True
-        ):
-            soup = BeautifulSoup(rental_property_html, "html.parser")
-            yield Property(
-                id=int(re.search(
-                    "(.*)property-(.*).html",
-                    soup.find_all("link")[1]['href']
-                ).group(2)),
-                title=soup.find_all("h1", attrs={'class': 'fs-22'})[0].text,
-                link=soup.find_all("link")[1]['href'],
-                price=soup.find_all(
-                    "p",
-                    attrs={'class': 'property-header-price'}
-                )[0].findChildren()[0].text.strip(),
-                description=soup.find_all(
-                    "div",
-                    attrs={"class": "description"}
-                )[0].text.strip().replace("\n", " "),
-                stations=[
-                    x.text.strip().replace("\n", " ") for x in
-                    soup.find_all(
-                        "ul",
-                        attrs={'class': 'stations-list'}
-                    )[0].findChildren("li")
-                ],
-                images=[
-                    x['src'] for x in
-                    soup.find_all(
-                        "div",
-                        attrs={'class': 'gallery-grid'}
-                    )[0].findChildren("img")
-                ]
-            )
-
-
-database = peewee.SqliteDatabase("rightmove.db")
-
-class Property(peewee.Model):
-    id = peewee.BigIntegerField(primary_key=True)
-    title = peewee.CharField()
-    link = peewee.CharField()
-    price = peewee.CharField()
-    description = peewee.CharField()
-    description_minified = peewee.CharField()
-    stations = peewee.CharField()
-    images = peewee.CharField()
-    favourite = peewee.BooleanField(default=False)
-
-    class Meta:
-        database = database
-
-def minify(text):
-    return re.sub('[^0-9a-zA-Z]+', '', text).lower()
+    # Original scraper: stations found by looking at maps
+    # Can include changes etc
+    # Up to approximately 2h15
+    # Parameters for the scraper: stations, radius etc.
+    STATIONS = [
+        {'Nantwich':6473}, 
+        {'Chester':2024},
+        {'Acton Bridge':68},
+        {'Hartford':4295},
+        {'Winsford':10172},
+        {'Macclesfield':5930},
+        {'Prestbury':7421},
+        {'Holmes Chapel':4673},
+        {'Sandbach':7946},
+        {'Crewe':2423},
+        {'Congleton':2288},
+        {'Alsager':185},
+        {'Nantwich':6473},{'Wrenbury':10331},
+        {'Whitchurch (Salop)':10004},{'Kidsgrove':5114},
+        {'Stoke-on-Trent':8771},{'Stone':8777},
+        {'Ambergate':209},{'Willington':10112},
+        {'Burton-on-Trent':1613},{'Stafford':8660},
+        {'Rugeley Trent Valley':7856},{'Codsall':2231},
+        {'Albrighton':125},{'Cosford':2357},
+        {'Stroud':8858},{'Stonehouse':8795},
+        {'Pershore':7184},{'Kingham':5156},
+        {'Moreton-in-Marsh':6371}, {'Westbury':9920},
+        {'Frome':3641}, {'Taunton':9056},
+        {'Tiverton':9218}, {'Hamworthy':4211},
+        {'Brockenhurst':1418}, {'Ashurst New Forest':389},
+        {'Worcester': 10298}, {'Pershore': 7184},
+        {'Hagley': 4109}, {'Evesham': 3323},
+        {'Honeybourne': 4697}, {'Shipton': 8207},
+        {'Ascott-under-Wychwood Station': 350}, {'Charlbury': 1952},
+        {'Finstock': 3521},{'Combe': 2282},
+        {'Bradford-on-avon': 1265}, {'Bedwyn': 788},
+        {'Pewsey': 7211}, {'Westbury': 9920},
+        {'Frome': 3641}, 
+        {'Castle Cary': 1853},
+        {'Tisbury': 9215}, {'Gillingham': 3755},
+        {'Templecombe': 9080}, {'Salisbury': 7922},
+        {'Warminster': 9620}, {'Dilton Marsh Rail': 2771},
+        {'Avoncliff': 449}, {'Freshford': 3623},
+        {'Melksham': 6140}, {'Yate': 10373},
+        {'Cam & Dursley': 1691}, {'Kemble': 5009},
+        {'Market Harborough': 6050}, {'Kettering': 5087},
+        {'Corby': 15013}, {'Wellingborough': 9743},
+        {'Banbury': 545}, {'Bicester North': 929},
+        {'Princes Risborough': 7454}, {'Bicester Town': 932},
+        {'Aylesbury': 458}, {'Amersham': 215},
+        {'Long Buckby': 5816}, {'Theale': 9125},
+        {'Aldermaston': 131}, {'Midgham': 6209},
+        {'Thatcham': 9095}, {'Newbury': 6599},
+        {'Kintbury': 5222}, {'Leamington Spa': 5444},
+        {'Newbury Racecourse':  6596}, {'Newington': 6623}, 
+        {'Hollingbourne': 4661}, {'Chilham': 2048}, 
+        {'Wye': 10346}, {'Ham street': 4157}, 
+        {'Appledore': 266}, {'Estchingham': 3305},
+        {'Chippenham': 2069}
+    ]
+    '''
 
 
-if __name__ == "__main__":
-    print("Starting house search...")
+    def __init__(self, name:str=None):
+        super(RightmoveScraper, self).__init__()
+        self.page = RightmovePage()
+        self.property = RightmoveProperty()
 
-    Property.create_table(fail_silently=True)
+    def set_url(self, parameters:dict):        
+        _url = f"{self.URL_ROOTNAME}/{parameters['propertyType']}/find.html?"
+        count = 0
+        for ix in range(len(self.KEYS)):
+            key = self.KEYS[ix]
+            if key in parameters.keys():
+                if parameters[key]:
+                    if count > 0:
+                        _url += f"&{key}={parameters[key]}"
+                    else:
+                        _url += f"{key}={parameters[key]}"
+                    count += 1
+        return _url
+    
+    def read_parameters(self, filename:str):
+        _parameters = super(ImmobiliareScraper, self).read_parameters(filename)
+        self.location = _parameters["location"]
+        self.country = _parameters["country"]
+        self.property_type = _parameters["propertyType"]
 
-    rightmove = Rightmove(
-        user_agent="Kate is looking for a flat so made her own scraper"
-    )
-
-    properties = ""
-
-    SUBJECT = "Rightmove New Available Properties"
-
-    port = 465  # For SSL
-    smtp_server = "smtp.gmail.com"
-    sender_email = ""  # Enter your address
-    receiver_email = ""  # Enter receiver address
-    password = ""
-
-    context = ssl.create_default_context()
-
-    for house in rightmove.rental_search({"radius": "0.0"}):
-        house.description_minified = minify(house.description)
-
-        yes_pls = [
-            'underfloor',
-            'stunning',
-            'wooden floor',
-            'balcony',
-            'terrace',
-            'loft'
-        ]
-
-        no_thx = [
-            'groundfloor'
-        ]
-        if any(
-                y in house.description_minified for y in yes_pls
-        ) and not any(
-            n in house.description_minified for n in no_thx
-        ):
-            house.favourite = True
-
-        try:
-            house.save(force_insert=True)
-            database.commit()
-        except peewee.IntegrityError as e:
-            pass
-
-        out = "{} / {} - {}".format(house.title, house.price, house.link)
-        properties = properties + '\n' + "{} - {}".format(house.title, house.link)
-        message = 'Subject: {}\n\n{}'.format(SUBJECT, properties)
-        if house.favourite:
-            out = "OMG! {}".format(out)
-            properties = properties + '\n' + "{} - {}".format(house.title, house.link)
-            message = 'Subject: {}\n\n{}'.format(SUBJECT, properties)
-        print(out)
-
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
-
-
-
+        if hasattr(self, 'REGIONS'):
+            self.region = self.REGIONS[_parameters['location']]
+        return _parameters
+    
+    def get_next_search_page(self, ix):
+        return f"{str(self.url)}&index={ix * self.NUMBER_OF_RESULTS_PER_PAGE}"
+    

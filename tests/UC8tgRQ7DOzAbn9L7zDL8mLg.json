@@ -1,0 +1,548 @@
+{
+    "videos": [
+        {
+            "title": "Scrape .aspx sites with this method",
+            "links": [
+                "https://www.youtube.com/watch?v=WZshV5nYVQc"
+            ]
+        },
+        {
+            "title": "ASYNC too Fast? Sync too Slow? Use THIS",
+            "links": [
+                "https://www.youtube.com/watch?v=zZSAQxdJFcQ"
+            ]
+        },
+        {
+            "title": "Supercharge Your Scraper With ASYNC (here's how)",
+            "links": [
+                "https://www.youtube.com/watch?v=1QyORzuRedE"
+            ]
+        },
+        {
+            "title": "Modern HTML Scraping with Pythons BEST Tools",
+            "links": [
+                "https://www.youtube.com/watch?v=iRR-kv-3u_c"
+            ]
+        },
+        {
+            "title": "Large JSON Response from an API Call? Try This",
+            "links": [
+                "https://www.youtube.com/watch?v=xzxWLVCUvLo"
+            ]
+        },
+        {
+            "title": "Are CLI Frameworks Worth it? Trying TYPER",
+            "links": [
+                "https://www.youtube.com/watch?v=vnDNoBn1Jf4"
+            ]
+        },
+        {
+            "title": "3 Ways To Scrape Infinite Scroll Sites with Playwright",
+            "links": [
+                "https://www.youtube.com/watch?v=VDf7nfjLwRU"
+            ]
+        },
+        {
+            "title": "The Biggest Mistake I Made When Starting Freelancing",
+            "links": [
+                "https://www.youtube.com/watch?v=_SDkkb80AEk"
+            ]
+        },
+        {
+            "title": "Why I don't use the best Web Scraping Framework",
+            "links": [
+                "https://www.youtube.com/watch?v=qX0jZqlmO2o"
+            ]
+        },
+        {
+            "title": "Web Scraping Made Easy Using this Method.",
+            "links": [
+                "https://www.youtube.com/watch?v=UvFphlHWchU"
+            ]
+        },
+        {
+            "title": "You Should Make Your OWN HTTP Clients for APIs (Shopify x Python)",
+            "links": [
+                "https://www.youtube.com/watch?v=sTefsbUCLL0"
+            ]
+        },
+        {
+            "title": "How To Parse Data Scraped from SCRIPT tags",
+            "links": [
+                "https://www.youtube.com/watch?v=0MjH90eS9-w"
+            ]
+        },
+        {
+            "title": "Try THIS Simple Python Decorator (It's Super Useful)",
+            "links": [
+                "https://www.youtube.com/watch?v=4WQba4KwmRs"
+            ]
+        },
+        {
+            "title": "Don't Keep Requesting API Data, DO THIS!",
+            "links": [
+                "https://www.youtube.com/watch?v=GAGM7HddbEk"
+            ]
+        },
+        {
+            "title": "Scraping multiples websites with one Python script",
+            "links": [
+                "https://www.youtube.com/watch?v=tGejYtmppQI"
+            ]
+        },
+        {
+            "title": "Automate your job with Python",
+            "links": [
+                "https://www.youtube.com/watch?v=qYSWWGz9Z6s"
+            ]
+        },
+        {
+            "title": "Web Scraping with GO... Easy AND Fast?!",
+            "links": [
+                "https://www.youtube.com/watch?v=wUSgA8WEy4Q"
+            ]
+        },
+        {
+            "title": "Web Scraping Methods You NEED to Know",
+            "links": [
+                "https://www.youtube.com/watch?v=st7RG6Bzyxs"
+            ]
+        },
+        {
+            "title": "What's So Special About this Python Framework?!",
+            "links": [
+                "https://www.youtube.com/watch?v=_b7Ni92TyOw"
+            ]
+        },
+        {
+            "title": "THIS is a better way to return scraped data.",
+            "links": [
+                "https://www.youtube.com/watch?v=WlZx9f7AxUI"
+            ]
+        },
+        {
+            "title": "How To Scrape (almost) ANY Website with Python",
+            "links": [
+                "https://www.youtube.com/watch?v=A9ZDqxvwNDs"
+            ]
+        },
+        {
+            "title": "How to Use Recursion in Python for API Pagination",
+            "links": [
+                "https://www.youtube.com/watch?v=X4WctWZ2ANw"
+            ]
+        },
+        {
+            "title": "Best Web Scraping Combo? Use These In Your Projects",
+            "links": [
+                "https://www.youtube.com/watch?v=HpRsfpPuUzE"
+            ]
+        },
+        {
+            "title": "The Python Tools a Pro Web Scraper Uses Day to Day",
+            "links": [
+                "https://www.youtube.com/watch?v=iWVd2umjLk8"
+            ]
+        },
+        {
+            "title": "How a Web Scraping Pro Parses HTML in Python",
+            "links": [
+                "https://www.youtube.com/watch?v=qO38y-m8_G8"
+            ]
+        },
+        {
+            "title": "BeautifulSoup is NOT the king of HTML Parsers (try this one)",
+            "links": [
+                "https://www.youtube.com/watch?v=D4xCGnwjMZQ"
+            ]
+        },
+        {
+            "title": "Full Project with Scrapy - The BEST Scraping Framework",
+            "links": [
+                "https://www.youtube.com/watch?v=zOx8Com2OKI"
+            ]
+        },
+        {
+            "title": "Does This Feature Make Flask-RESTful Worth Using?",
+            "links": [
+                "https://www.youtube.com/watch?v=ow451CjBV-U"
+            ]
+        },
+        {
+            "title": "How do YOU Solve this common Web Scraping issue?",
+            "links": [
+                "https://www.youtube.com/watch?v=LNoVpdBtD4k"
+            ]
+        },
+        {
+            "title": "Why *ARGS and **KWARGS are Useful in Python",
+            "links": [
+                "https://www.youtube.com/watch?v=G7gZKANSmqk"
+            ]
+        },
+        {
+            "title": "How I Organize Data In Python with Dataclasses",
+            "links": [
+                "https://www.youtube.com/watch?v=5mpLJxKfnXQ"
+            ]
+        },
+        {
+            "title": "Is THIS The Best Way to Build a Scraper API?",
+            "links": [
+                "https://www.youtube.com/watch?v=QOcChmgLXiI"
+            ]
+        },
+        {
+            "title": "Try My Price Monitoring Beginner Python Project",
+            "links": [
+                "https://www.youtube.com/watch?v=uWg-XAyyJTk"
+            ]
+        },
+        {
+            "title": "Python JSON API in 30 mins (Try This Framework!)",
+            "links": [
+                "https://www.youtube.com/watch?v=DR3FFvqvuE0"
+            ]
+        },
+        {
+            "title": "Async & Await in Python Simple & FAST HTTP Requests",
+            "links": [
+                "https://www.youtube.com/watch?v=9Bo8IetU9So"
+            ]
+        },
+        {
+            "title": "Make API Calls Like a PRO - Python API Client x Shopify",
+            "links": [
+                "https://www.youtube.com/watch?v=E39a7kQfjSg"
+            ]
+        },
+        {
+            "title": "My Indeed Web Scraper Stopped Working. Here's Why",
+            "links": [
+                "https://www.youtube.com/watch?v=HOS5Hix--bE"
+            ]
+        },
+        {
+            "title": "Tortoise ORM for Python Projects - Simple & ASYNC",
+            "links": [
+                "https://www.youtube.com/watch?v=ncV7k35-e0s"
+            ]
+        },
+        {
+            "title": "How I Scrape Amazon With Python",
+            "links": [
+                "https://www.youtube.com/watch?v=-0SSdvwK6Ho"
+            ]
+        },
+        {
+            "title": "Following Links With Scrapy (regex is GOOD here)",
+            "links": [
+                "https://www.youtube.com/watch?v=z_cdzgrjERQ"
+            ]
+        },
+        {
+            "title": "This is how I scrape data from iframes",
+            "links": [
+                "https://www.youtube.com/watch?v=WsfINO81zIA"
+            ]
+        },
+        {
+            "title": "Bubble Sort Algorithm in Python Example: Code and Explanation",
+            "links": [
+                "https://www.youtube.com/watch?v=dXI1VJHl_lE"
+            ]
+        },
+        {
+            "title": "The Truth About Learning to Code.",
+            "links": [
+                "https://www.youtube.com/watch?v=Ez9wY7Cls0E"
+            ]
+        },
+        {
+            "title": "I Tried 100s of Free Proxies, Here's the results.",
+            "links": [
+                "https://www.youtube.com/watch?v=emPgih1AYTs"
+            ]
+        },
+        {
+            "title": "How I Email Myself Data from my Python Scripts",
+            "links": [
+                "https://www.youtube.com/watch?v=CgvOCXs8Xec"
+            ]
+        },
+        {
+            "title": "How to get data from AJAX Requests in Python",
+            "links": [
+                "https://www.youtube.com/watch?v=zibNBOBsDZk"
+            ]
+        },
+        {
+            "title": "Django Rest Framework for Beginners - Simple CRUD API",
+            "links": [
+                "https://www.youtube.com/watch?v=OJdFj5hPAKs"
+            ]
+        },
+        {
+            "title": "Is THIS the Best Way to Scrape Data with Playwright?",
+            "links": [
+                "https://www.youtube.com/watch?v=IUOl4W_3tTg"
+            ]
+        },
+        {
+            "title": "I Don't Waste Time Parsing HTML (So I do THIS)",
+            "links": [
+                "https://www.youtube.com/watch?v=FPSyjJdudHU"
+            ]
+        },
+        {
+            "title": "The Biggest Mistake Beginners Make When Web Scraping",
+            "links": [
+                "https://www.youtube.com/watch?v=G7s0eGOaRPE"
+            ]
+        },
+        {
+            "title": "Pydantic is the Python Package I Wish I'd Learned Earlier",
+            "links": [
+                "https://www.youtube.com/watch?v=_1Nf9KNhsPw"
+            ]
+        },
+        {
+            "title": "Scrapy Middleware - Custom User Agents",
+            "links": [
+                "https://www.youtube.com/watch?v=bM7SMx44xgY"
+            ]
+        },
+        {
+            "title": "GO for Beginners - Web Scraping with Golang Tutorial",
+            "links": [
+                "https://www.youtube.com/watch?v=NU4OlJVj1gs"
+            ]
+        },
+        {
+            "title": "Parsing HTML Tables with Python to a Dictionary",
+            "links": [
+                "https://www.youtube.com/watch?v=kmosTh85dEs"
+            ]
+        },
+        {
+            "title": "Modern Python uses Type HINTS, Here's How",
+            "links": [
+                "https://www.youtube.com/watch?v=0Qu_vJp0OAQ"
+            ]
+        },
+        {
+            "title": "Use THIS Algorithm To Find KEYWORDS in Text - A Short Python Project",
+            "links": [
+                "https://www.youtube.com/watch?v=O43XPHC_DEs"
+            ]
+        },
+        {
+            "title": "SQLModel is the Pydantic inspired Python ORM we\u2019ve been waiting for",
+            "links": [
+                "https://www.youtube.com/watch?v=1oGW-ItQG94"
+            ]
+        },
+        {
+            "title": "Enumerate Will Save You From THIS!",
+            "links": [
+                "https://www.youtube.com/watch?v=I4pVZuNBnH4"
+            ]
+        },
+        {
+            "title": "How to HIDE Your API Keys in Python Projects",
+            "links": [
+                "https://www.youtube.com/watch?v=CJjSOzb0IYs"
+            ]
+        },
+        {
+            "title": "How to Make 2500 HTTP Requests in 2 Seconds with Async & Await",
+            "links": [
+                "https://www.youtube.com/watch?v=Ii7x4mpIhIs"
+            ]
+        },
+        {
+            "title": "Are You Still Using Excel? AUTOMATE it with PYTHON",
+            "links": [
+                "https://www.youtube.com/watch?v=PBRMvAKz_rQ"
+            ]
+        },
+        {
+            "title": "How to Parse HTML Tables to JSON With Python",
+            "links": [
+                "https://www.youtube.com/watch?v=YjpGdFwIAxg"
+            ]
+        },
+        {
+            "title": "FIX Your AttributeError in Python & WHY You See it",
+            "links": [
+                "https://www.youtube.com/watch?v=LEH05TuuEg0"
+            ]
+        },
+        {
+            "title": "Learn Web Scraping With Python: Full Project - HTML, Save to CSV, Pagination",
+            "links": [
+                "https://www.youtube.com/watch?v=GyB43hudfQw"
+            ]
+        },
+        {
+            "title": "Turn Websites into Real Time API's with ScrapyRT",
+            "links": [
+                "https://www.youtube.com/watch?v=_LLSiBMD_sk"
+            ]
+        },
+        {
+            "title": "HTTPX is the ASYNC Requests I was Looking For",
+            "links": [
+                "https://www.youtube.com/watch?v=2FNcJKCfrzI"
+            ]
+        },
+        {
+            "title": "How I Scrape Amazon Product Reviews with Python",
+            "links": [
+                "https://www.youtube.com/watch?v=UD4VzOfhBCQ"
+            ]
+        },
+        {
+            "title": "Want To Learn Web Scraping? Start HERE",
+            "links": [
+                "https://www.youtube.com/watch?v=EJNJ5_i_zu8"
+            ]
+        },
+        {
+            "title": "How to Scrape JavaScript Websites with Scrapy and Playwright",
+            "links": [
+                "https://www.youtube.com/watch?v=0wO7K-SoUHM"
+            ]
+        },
+        {
+            "title": "AM I Missing out NOT Using Node for Web Scraping?",
+            "links": [
+                "https://www.youtube.com/watch?v=VM8mE9iXAMo"
+            ]
+        },
+        {
+            "title": "THIS is Playwrights BEST Feature for Web Automation",
+            "links": [
+                "https://www.youtube.com/watch?v=oPjfDkge8Vc"
+            ]
+        },
+        {
+            "title": "Login and Scrape Data with Playwright and Python",
+            "links": [
+                "https://www.youtube.com/watch?v=H2-5ecFwHHQ"
+            ]
+        },
+        {
+            "title": "New to Scrapy? Try it WITH BeautifulSoup to Parse HTML Easily",
+            "links": [
+                "https://www.youtube.com/watch?v=b3OEo0p6tUM"
+            ]
+        },
+        {
+            "title": "HIDING Data with JavaScript? Web Scraping Obfuscation",
+            "links": [
+                "https://www.youtube.com/watch?v=ks-iekIJy6M"
+            ]
+        },
+        {
+            "title": "Following LINKS Automatically with Scrapy CrawlSpider",
+            "links": [
+                "https://www.youtube.com/watch?v=o1g8prnkuiQ"
+            ]
+        },
+        {
+            "title": "Web Scraping Weather Data with Python",
+            "links": [
+                "https://www.youtube.com/watch?v=cta1yCb3vA8"
+            ]
+        },
+        {
+            "title": "How I Use Scrapy Shell When Creating Web Scraping Projects",
+            "links": [
+                "https://www.youtube.com/watch?v=yLOUJegHoMg"
+            ]
+        },
+        {
+            "title": "How To Handle Errors & Exceptions with Requests and Python",
+            "links": [
+                "https://www.youtube.com/watch?v=ULv9x0GQFbw"
+            ]
+        },
+        {
+            "title": "A Short and SIMPLE HTML Web Scraper in 6 lines of CODE",
+            "links": [
+                "https://www.youtube.com/watch?v=EmDwXmwxVW8"
+            ]
+        },
+        {
+            "title": "How To Retry HTTP Requests Using a Decorator in Python",
+            "links": [
+                "https://www.youtube.com/watch?v=gzQUzslnfeU"
+            ]
+        },
+        {
+            "title": "This SQLite Database Model is Easy and Ready for your Python Projects!",
+            "links": [
+                "https://www.youtube.com/watch?v=LFG2Kx1m-Dc"
+            ]
+        },
+        {
+            "title": "Create A Web Scraper Class in Python and requests-html",
+            "links": [
+                "https://www.youtube.com/watch?v=ouWLsFTgaQw"
+            ]
+        },
+        {
+            "title": "How To Add LOGGING to Your Python Projects for Beginners",
+            "links": [
+                "https://www.youtube.com/watch?v=fYmQLv16-44"
+            ]
+        },
+        {
+            "title": "Scraping Data from JavaScript rendered tables with Python",
+            "links": [
+                "https://www.youtube.com/watch?v=qxj7EXYeNls"
+            ]
+        },
+        {
+            "title": "How To Add a Database to your Scrapy Project",
+            "links": [
+                "https://www.youtube.com/watch?v=cw5QtDxwTIQ"
+            ]
+        },
+        {
+            "title": "Get Started with Scrapy - Python's Best Web Scraping Framework",
+            "links": [
+                "https://www.youtube.com/watch?v=pSyiJKdCKtc"
+            ]
+        },
+        {
+            "title": "How to store data with Python and SQLite3",
+            "links": [
+                "https://www.youtube.com/watch?v=RZI-v-Z1W4c"
+            ]
+        },
+        {
+            "title": "Hidden APIs with Scrapy - easy JSON data extraction",
+            "links": [
+                "https://www.youtube.com/watch?v=xjieRVnuPcQ"
+            ]
+        },
+        {
+            "title": "Using Inspect Element for Web Scraping? Watch THIS",
+            "links": [
+                "https://www.youtube.com/watch?v=Xw2eNRh4pf8"
+            ]
+        },
+        {
+            "title": "Always Check for the Hidden API when Web Scraping",
+            "links": [
+                "https://www.youtube.com/watch?v=DqtlR0y0suo"
+            ]
+        },
+        {
+            "title": "",
+            "links": []
+        }
+    ]
+}

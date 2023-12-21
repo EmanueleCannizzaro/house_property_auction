@@ -5,4 +5,4 @@ include .bumpversion.cfg
 include .coveragerc
 include .isort.cfg
 include LICENSE
-recursive-include src/crib/resources *
+#recursive-include src/crib/resources *

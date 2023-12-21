@@ -152,3 +152,10 @@ venv
 pip-wheel-metadata/
 
 
+/www/
+/www/
+/docker_images/
+/99_backup/
+/celery_worker/
+/demos/00_backup/
+/demos/downloads/

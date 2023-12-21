@@ -6,10 +6,7 @@ import os
 from os.path import basename, dirname, join, splitext
 
 
-try:
-    from setuptools import find_packages, setup
-except ImportError as e:
-    from distutils.core import setup
+from setuptools import find_packages, setup
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -64,6 +61,9 @@ setup(
         #   'rst': ['docutils>=0.11'],
         #   ':python_version=="2.6"': ['argparse'],
     },
-    entry_points={"console_scripts": ["crib = crib.cli:main"]},
+    entry_points={
+		'console_scripts': ['crib = crib.cli:main'],
+		'scrapy': ['settings = openrent.settings']
+	},
     package_data={"property_scraper": ["docs/*", "docs/*/*"]}
 )
